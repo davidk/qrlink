@@ -1,0 +1,15 @@
+[package]
+name = "qrlink"
+version = "0.0.1"
+authors = ["davidk"]
+edition = "2018"
+license = "MIT"
+description = "Generate QR codes for links"
+repository = "https://github.com/davidk/qrlink"
+readme = "README.md"
+
+[dependencies]
+qrcodegen = "1.8.0"
+image = "0.23.13"
+imageproc = "0.22.0"
+clap = "2.32.0"
