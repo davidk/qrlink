@@ -21,18 +21,17 @@ jobs:
         xz -T0 -f ${GITHUB_WORKSPACE}/target/release/qrlink
         mv ${GITHUB_WORKSPACE}/target/release/qrlink.xz ${GITHUB_WORKSPACE}/target/release/qrlink.x86_64.xz
  
+    - name: Build and compress aarch64 binaries with xz
+      run: |
+        cross build --target aarch64-unknown-linux-gnu --release
+        xz -T0 -f ${GITHUB_WORKSPACE}/target/aarch64-unknown-linux-gnu/release/qrlink
+        mv ${GITHUB_WORKSPACE}/target/aarch64-unknown-linux-gnu/release/qrlink.xz ${GITHUB_WORKSPACE}/target/aarch64-unknown-linux-gnu/release/qrlink.aarch64.xz
+
     - name: Build and compress armv7 binaries with xz
       run: |
         cross build --target armv7-unknown-linux-gnueabihf --release
         xz -T0 -f ${GITHUB_WORKSPACE}/target/armv7-unknown-linux-gnueabihf/release/qrlink
         mv ${GITHUB_WORKSPACE}/target/armv7-unknown-linux-gnueabihf/release/qrlink.xz ${GITHUB_WORKSPACE}/target/armv7-unknown-linux-gnueabihf/release/qrlink.armv7.xz
-
-    - name: Release ARMv7 binary
-      uses: JasonEtco/upload-to-release@master
-      with:
-        args: /github/workspace/target/armv7-unknown-linux-gnueabihf/release/qrlink.armv7.xz application/x-xz
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Release x86-64 binary
       uses: JasonEtco/upload-to-release@master
@@ -41,3 +40,16 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Release aarch64 binary
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: /github/workspace/target/aarch64-unknown-linux-gnu/release/qrlink.aarch64.xz application/x-xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release ARMv7 binary
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: /github/workspace/target/armv7-unknown-linux-gnueabihf/release/qrlink.armv7.xz application/x-xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
