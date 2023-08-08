@@ -10,7 +10,7 @@ fn main() {
         .version("0.0.1")
         .about("Encode a link as a scannable QR code")
         .author("davidk")
-        .usage("qrlink https://example.com [ --imagefile (output_name.png) --scale 10 | --svg | --svgfile (output_name.svg) ]")
+        .usage("qrlink [ https://example.com | --ask ] [ --imagefile (output_name.png) --scale 10 | --svg | --svgfile (output_name.svg) ]")
         .arg(
             Arg::with_name("link")
                 .long("link")

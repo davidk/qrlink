@@ -20,7 +20,7 @@ To use qrlink's command-line implementation, download a pre-built binary from th
 
 ```bash
 USAGE:
-    qrlink https://example.com [ --imagefile (output_name.png) --scale 10 | 
+    qrlink [ https://example.com | --ask ] [ --imagefile (output_name.png) --scale 10 |
     --svg | --svgfile (output_name.svg) ]
 
 FLAGS:
