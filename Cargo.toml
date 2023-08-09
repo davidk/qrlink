@@ -1,6 +1,6 @@
 [package]
 name = "qrlink"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["davidk"]
 edition = "2018"
 license = "MIT"
