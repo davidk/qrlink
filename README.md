@@ -1,10 +1,6 @@
 # qrlink
 
-This Rust crate encodes a URL / link into a QR code. A [command-line interface](https://github.com/davidk/qrlink/releases) is available for testing and basic use, too.
-
-## Releases
-
-To use qrlink's command-line implementation, download a pre-built binary from the [releases tab](https://github.com/davidk/qrlink/releases).
+This utility encodes a URL / link into a QR code. Pre-built binaries for a [command-line interface](https://github.com/davidk/qrlink/releases) are available.
 
 ## Usage 
 
