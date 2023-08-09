@@ -71,7 +71,7 @@ pub fn encode(config: &Url) -> Result<QrCode, Box<dyn error::Error>> {
         Err(e) => return Err(e.into()),
     };
 
-    match QrCode::encode_text(&c, QrCodeEcc::High) {
+    match QrCode::encode_text(&c, QrCodeEcc::Low) {
         Ok(qr) => Ok(qr),
         Err(e) => Err(e.into()),
     }
