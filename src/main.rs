@@ -2,8 +2,8 @@ extern crate clap;
 extern crate qrlink;
 
 use clap::{App, Arg};
-use std::{fs, io, io::Write};
 use std::path::Path;
+use std::{fs, io, io::Write};
 
 fn main() {
     let options = App::new("qrlink")
@@ -84,7 +84,6 @@ fn main() {
     let mut link = String::new();
 
     if options.is_present("ask") {
-
         print!("Enter URL to convert: ");
 
         io::stdout().flush().unwrap();
@@ -95,7 +94,7 @@ fn main() {
     } else {
         link = options.value_of("link").unwrap().to_string();
     }
-    
+
     let config = qrlink::Url::new(Some(&link));
 
     let encoding = match qrlink::encode(&config) {
