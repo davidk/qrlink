@@ -4,35 +4,6 @@ extern crate image;
 extern crate qrcodegen;
 mod exporters;
 
-macro_rules! qr_link {
-    () => {
-        "{}"
-    };
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::Url;
-
-    /// Basic URL test
-    #[test]
-    fn test_url() {
-        assert_eq!(
-            Url::new(Some("https://google.com")).format().unwrap(),
-            "https://google.com"
-        );
-    }
-
-    /// Different protocols outside of http(s) should work too
-    #[test]
-    fn test_url_proto() {
-        assert_eq!(
-            Url::new(Some("ssh://github.com")).format().unwrap(),
-            "ssh://github.com"
-        )
-    }
-}
-
 /// URL QR code generator
 use std::error;
 
@@ -44,34 +15,8 @@ use crate::exporters::methods::{
     to_svg_string as to_svg_string_export,
 };
 
-#[derive(Debug)]
-pub struct Url {
-    pub link: String,
-}
-
-impl Url {
-    pub fn new(mut _link: Option<&str>) -> Self {
-        Url {
-            link: _link.unwrap().to_string(),
-        }
-    }
-
-    /// Call the qr_link! macro to generate a qr-string and/or return any errors that
-    /// need to be raised to the caller. Note: format does not enforce protocol (http, ftp,
-    /// https, etc), it is up to the end user to use the right value for their application
-    pub fn format(&self) -> Result<String, FormatError> {
-        return Ok(format!(qr_link!(), &self.link));
-    }
-}
-
-/// generates a qrcode from a Url
-pub fn encode(config: &Url) -> Result<QrCode, Box<dyn error::Error>> {
-    let c = match config.format() {
-        Ok(c) => c,
-        Err(e) => return Err(e.into()),
-    };
-
-    match QrCode::encode_text(&c, QrCodeEcc::Low) {
+pub fn encode(url: Option<&str>) -> Result<QrCode, Box<dyn error::Error>> {
+    match QrCode::encode_text(url.unwrap(), QrCodeEcc::Low) {
         Ok(qr) => Ok(qr),
         Err(e) => Err(e.into()),
     }

@@ -7,7 +7,7 @@ use std::{fs, io, io::Write};
 
 fn main() {
     let options = App::new("qrlink")
-        .version("0.0.2")
+        .version("0.0.3")
         .about("Encode a link as a scannable QR code")
         .author("davidk")
         .usage("qrlink [ https://example.com | --ask ] [ --imagefile (output_name.png) --scale 10 | --svg | --svgfile (output_name.svg) ]")
@@ -95,9 +95,7 @@ fn main() {
         link = options.value_of("link").unwrap().to_string();
     }
 
-    let config = qrlink::Url::new(Some(&link));
-
-    let encoding = match qrlink::encode(&config) {
+    let encoding = match qrlink::encode(Some(&link)) {
         Ok(e) => e,
         Err(e) => {
             println!("There was a problem generating the QR code.\n{}", e);
